@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Briefing do seu site · Stoot</title>
-<meta name="description" content="Questionário da Stoot para construir o seu site.">
+<title>Briefing · Stoot</title>
+<meta name="description" content="Questionário da Stoot para conhecer o seu negócio.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,322 +24,38 @@ html, body { margin: 0; background: var(--bg); color: var(--tx); }
 body { font-family: 'Manrope', system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 button, input, textarea { font: inherit; color: inherit; }
 
-/* Topo fixo: marca, etapa e progresso */
-.topo { position: sticky; top: 0; z-index: 5; background: rgba(246,246,242,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--ln); }
-.topo-in { max-width: 640px; margin: 0 auto; padding: 14px 20px 12px; display: flex; align-items: center; gap: 14px; }
-.marca { font-weight: 800; font-size: 18px; letter-spacing: -.04em; white-space: nowrap; }
+
+.topo { border-bottom: 1px solid var(--ln); }
+.topo-in { max-width: 640px; margin: 0 auto; padding: 14px 20px; }
+.marca { font-weight: 800; font-size: 18px; letter-spacing: -.04em; }
 .marca b { color: var(--bl); }
-.etapa { margin-left: auto; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--tx3); white-space: nowrap; }
-.etapa strong { color: var(--bl); font-weight: 500; }
-.barra { height: 3px; background: var(--ln); }
-.barra i { display: block; height: 100%; width: 0; background: var(--bl); transition: width .35s ease; }
-
-/* Conteúdo */
-main { max-width: 640px; margin: 0 auto; padding: 36px 20px 120px; }
-.rot { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--bl); margin: 0 0 10px; }
-h1 { margin: 0 0 12px; font-size: 34px; line-height: 1.1; font-weight: 800; letter-spacing: -.035em; }
-.intro { margin: 0 0 32px; color: var(--tx2); font-size: 16.5px; }
-.intro p { margin: 0 0 10px; }
-
-.campo { margin: 0 0 28px; }
-.campo > label, .campo > .tit { display: block; font-weight: 700; font-size: 16px; letter-spacing: -.01em; margin: 0 0 4px; }
-.campo .ob { color: var(--bl); margin-left: 3px; }
-.campo .opc { font-weight: 500; color: var(--tx3); font-size: 13px; margin-left: 6px; }
-.ajuda { color: var(--tx3); font-size: 14px; margin: 0 0 10px; }
-.ent { width: 100%; background: var(--s1); border: 1px solid var(--ln); border-radius: var(--r-sm); padding: 13px 14px; font-size: 16px; transition: border-color .15s, box-shadow .15s; }
-.ent::placeholder { color: #8e908a; }
-.ent:hover { border-color: var(--ln2); }
-.ent:focus { outline: none; border-color: var(--bl); box-shadow: 0 0 0 3px var(--bl-s); }
-textarea.ent { min-height: 116px; resize: vertical; line-height: 1.5; }
-
-/* Opções em cartão (escolha única e várias) */
-.ops { display: grid; gap: 10px; }
-.op { position: relative; display: flex; align-items: center; gap: 12px; min-height: 54px; padding: 12px 14px; background: var(--s1); border: 1px solid var(--ln); border-radius: var(--r-md); cursor: pointer; transition: border-color .15s, box-shadow .15s, background .15s; user-select: none; }
-.op:hover { border-color: var(--ln2); }
-.op input { position: absolute; opacity: 0; pointer-events: none; }
-.op .marc { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--ln2); display: grid; place-items: center; background: var(--s1); transition: all .15s; }
-.op.multi .marc { border-radius: 6px; }
-.op .marc svg { width: 13px; height: 13px; opacity: 0; transition: opacity .15s; }
-.op span.txt { font-weight: 600; font-size: 15.5px; }
-.op span.txt small { display: block; font-weight: 500; font-size: 13.5px; color: var(--tx3); margin-top: 2px; line-height: 1.4; }
-.op.com-desc { align-items: flex-start; padding-top: 14px; padding-bottom: 14px; }
-.op.com-desc .marc { margin-top: 1px; }
-.op:has(input:checked) { border-color: var(--ok-fill); box-shadow: 0 0 0 1.5px var(--ok-fill); background: var(--ok-s); }
-.op:has(input:checked) .marc { background: var(--ok); border-color: var(--ok); }
-.op:has(input:checked) .marc svg { opacity: 1; }
-.op:has(input:focus-visible) { box-shadow: 0 0 0 3px var(--bl-s); border-color: var(--bl); }
-.outro-txt { margin-top: 10px; display: none; }
-.outro-txt.vis { display: block; }
-
-.erro { display: none; color: var(--rd); font-size: 13.5px; font-weight: 600; margin-top: 8px; }
-.campo.inv .erro { display: block; }
-.campo.inv .ent, .campo.inv .op { border-color: #e9a3a3; }
-
-.aviso { background: var(--s1); border: 1px solid var(--ln); border-left: 3px solid var(--bl); border-radius: var(--r-sm); padding: 12px 14px; font-size: 14px; color: var(--tx2); margin: 0 0 28px; }
-
-/* Rodapé fixo com navegação */
-.nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; background: rgba(246,246,242,.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--ln); padding-bottom: env(safe-area-inset-bottom); }
-.nav-in { max-width: 640px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; gap: 10px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 22px; border-radius: var(--r-sm); border: 1px solid var(--ln2); background: var(--s1); font-weight: 700; font-size: 15px; letter-spacing: -.01em; cursor: pointer; transition: filter .15s, background .15s; }
-.btn:hover { background: var(--s2); }
-.btn.pri { margin-left: auto; background: var(--bl); border-color: var(--bl); color: #fff; }
-.btn.pri:hover { filter: brightness(1.12); background: var(--bl); }
-.btn[disabled] { opacity: .55; cursor: wait; }
-.btn:focus-visible { outline: 2px solid var(--bl); outline-offset: 2px; }
-.salvo { font-size: 12.5px; color: var(--tx3); }
-
-/* Agradecimento */
-.fim { text-align: left; padding-top: 24px; }
-.fim .selo { width: 56px; height: 56px; border-radius: 50%; background: var(--ok-s); border: 1.5px solid var(--ok-fill); display: grid; place-items: center; margin-bottom: 22px; }
-.fim .selo svg { width: 26px; height: 26px; }
-
-.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.oculto { display: none !important; }
-
-@media (max-width: 520px) {
-  main { padding-top: 26px; }
-  h1 { font-size: 28px; }
-  .intro { font-size: 15.5px; }
-  .btn { padding: 0 18px; }
-  .salvo { display: none; }
-}
+main { max-width: 640px; margin: 0 auto; padding: 56px 20px 80px; }
+.rot { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--bl); margin: 0 0 12px; }
+h1 { margin: 0 0 22px; font-size: 40px; line-height: 1.08; font-weight: 800; letter-spacing: -.035em; }
+p { margin: 0 0 16px; color: var(--tx2); font-size: 17px; }
+p.forte { color: var(--tx); font-weight: 700; font-size: 18px; margin-top: 24px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 52px; padding: 0 30px; border-radius: var(--r-sm); background: var(--bl); border: 1px solid var(--bl); color: #fff; font-weight: 700; font-size: 16px; letter-spacing: -.01em; text-decoration: none; margin-top: 12px; transition: filter .15s; }
+.btn:hover { filter: brightness(1.12); }
+.btn:focus-visible { outline: 2px solid var(--bl); outline-offset: 3px; }
+.tempo { margin: 14px 0 0; font-size: 13.5px; color: var(--tx3); }
+@media (max-width: 520px) { main { padding-top: 36px; } h1 { font-size: 31px; } p { font-size: 16px; } .btn { width: 100%; } }
 </style>
 </head>
 <body>
-<header class="topo">
-  <div class="topo-in">
-    <div class="marca">stoot<b>.</b></div>
-    <div class="etapa" id="etapa"></div>
-  </div>
-  <div class="barra"><i id="barra"></i></div>
-</header>
-
-<main id="app" aria-live="polite"></main>
-
-<nav class="nav" id="nav">
-  <div class="nav-in">
-    <button class="btn" type="button" id="voltar">Voltar</button>
-    <span class="salvo" id="salvo"></span>
-    <button class="btn pri" type="button" id="seguir">Começar</button>
-  </div>
-</nav>
-
+<header class="topo"><div class="topo-in"><div class="marca">stoot<b>.</b></div></div></header>
+<main>
+  <p class="rot">Briefing</p>
+  <h1>Vamos conhecer o seu negócio?</h1>
+  <p>Este é o nosso questionário de briefing. Ele reúne o que precisamos saber sobre você e sobre o seu negócio para começar o trabalho com clareza e estratégia, seja no site, nos vídeos, nas postagens, no blog ou no tráfego pago.</p>
+  <p>Não existem respostas certas para algumas perguntas, mas todas são importantes para guiar o que vamos criar. Quanto mais completo o preenchimento, mais direcionado, funcional e persuasivo será o resultado.</p>
+  <p>Responda com calma, com as suas palavras. Um trabalho bem planejado tem muito mais chance de gerar resultado, construir autoridade e cumprir o seu papel dentro da sua estratégia digital.</p>
+  <p class="forte">Então, vamos começar?</p>
+  <a class="btn" id="comecar" href="formulario/">Começar</a>
+  <p class="tempo">Leva cerca de 20 minutos. O que você digitar fica salvo neste aparelho até enviar.</p>
+</main>
 <script>
-/* Endereço do script do Google (Apps Script, conta da Stoot) que recebe o envio e posta no Slack. */
-const ENVIO = 'https://script.google.com/macros/s/AKfycbyL3SAMXA_S0f0TNHEPWJTZjvh0b3uaYNDhze69PSuNI-7OoPDrFeOz6C8F5nBEOIO7Ow/exec';
-
-/* Perguntas: as mesmas do Google Forms e do Tally. `chave` é o que o stoot.OS usa para pôr cada resposta no dossiê. */
-const PESSOA = 'Como profissional';
-const ETAPAS = [
-  { id: 'inicio', rot: 'Apresentação', titulo: 'Vamos montar o seu site?',
-    intro: ['Este é o ponto de partida do seu site. As suas respostas guiam o texto, a estrutura e a estratégia.', 'Responda com as suas palavras, do jeito que você explicaria para um cliente. Não existem respostas certas, e o que você digitar fica salvo neste aparelho até enviar. Leva cerca de 20 minutos.'],
-    campos: [
-      { chave: 'nome', tipo: 'texto', titulo: 'Seu nome e o nome do negócio', ob: true, ph: 'Ex.: Ana Souza · Ana Doces Finos' },
-      { chave: 'perfil', tipo: 'escolha', titulo: 'Como você se apresenta para os clientes?', ob: true, opcoes: [
-        { t: PESSOA, d: 'Você é a marca. Ex.: médica, advogado, nutricionista, arquiteta, psicóloga, personal trainer' },
-        { t: 'Como clínica, escritório ou consultório', d: 'Uma equipe com vários profissionais' },
-        { t: 'Como empresa, loja ou marca', d: 'Ex.: confeitaria, ateliê, loja, restaurante, prestadora de serviço' },
-      ] },
-    ] },
-  { id: 'pessoa', rot: 'Sobre você', titulo: 'Agora, conte sobre você', se: (r) => r.perfil === PESSOA,
-    intro: ['É daqui que sai a área de apresentação do site.'],
-    campos: [
-      { chave: 'especialidade', tipo: 'texto', titulo: 'Qual é a sua área de atuação?', ajuda: 'Do jeito que você explicaria para um cliente. Ex.: cirurgiã plástica com foco em mamas; advogado trabalhista que atende empresas; nutricionista esportiva.', ob: true },
-      { chave: 'registros', tipo: 'texto', titulo: 'Registro profissional e certificações', ajuda: 'Ex.: CRM e RQE, OAB, CRN, CRP, CREA. Se a sua profissão não tem registro, deixe em branco.' },
-      { chave: 'trajetoria', tipo: 'longo', titulo: 'Sua formação e trajetória', ajuda: 'Onde estudou, especializações, cursos, há quanto tempo atua, conquistas, publicações, prêmios. Tudo o que mostra a sua experiência.', ob: true },
-    ] },
-  { id: 'negocio', rot: 'Sobre o negócio', titulo: 'Agora, conte sobre o negócio', se: (r) => r.perfil && r.perfil !== PESSOA,
-    intro: ['É daqui que sai a área de apresentação do site.'],
-    campos: [
-      { chave: 'atuacao', tipo: 'longo', titulo: 'O que o seu negócio faz e para quem?', ajuda: 'Em poucas linhas, como você explicaria para alguém que nunca ouviu falar. Ex.: clínica de dermatologia em Curitiba com quatro médicos; confeitaria artesanal de bolos para festas; escritório de advocacia de família.', ob: true },
-      { chave: 'trajetoria', tipo: 'longo', titulo: 'História e conquistas', ajuda: 'Como e quando começou, onde atende, tamanho da equipe, marcos importantes, prêmios e números (anos de mercado, clientes atendidos).', ob: true },
-      { chave: 'registros', tipo: 'texto', titulo: 'Dados que precisam aparecer no rodapé', ajuda: 'CNPJ, responsável técnico, registro no conselho, alvarás. Ex.: responsável técnico com CRM; OAB da sociedade. Se não houver, deixe em branco.' },
-    ] },
-  { id: 'servicos', rot: 'O que você oferece', titulo: 'O que você oferece',
-    campos: [
-      { chave: 'servicos', tipo: 'longo', titulo: 'Quais serviços ou produtos você oferece?', ajuda: 'Um por linha, com o nome e uma frase do que é e para quem é. Ex.: Bolo de casamento: bolos sob medida para até 300 convidados. Consultoria trabalhista: prevenção de processos para pequenas empresas.', ob: true },
-      { chave: 'foco', tipo: 'longo', titulo: 'O que este site deve vender ou apresentar?', ajuda: 'Um serviço ou produto específico, uma campanha, ou o negócio como um todo. Se for mais de um, diga qual é o principal.', ob: true },
-      { chave: 'servicos_juntos', tipo: 'longo', titulo: 'O que costuma ser contratado junto?', ajuda: 'Combinações frequentes ajudam a montar ofertas no site. Ex.: limpeza de pele e peeling; bolo e docinhos; divórcio e inventário.' },
-      { chave: 'servicos_futuros', tipo: 'longo', titulo: 'Pensa em oferecer algo novo nos próximos meses?', ajuda: 'Assim o site já nasce preparado para crescer.' },
-      { chave: 'jornada', tipo: 'longo', titulo: 'Como funciona o atendimento, do primeiro contato até a entrega?', ajuda: 'Conte as etapas. Ex.: consulta, exames, procedimento e retorno; reunião inicial, proposta, contrato e acompanhamento do processo.' },
-    ] },
-  { id: 'publico', rot: 'Público', titulo: 'Quem você atende e onde',
-    campos: [
-      { chave: 'publico', tipo: 'longo', titulo: 'Quem é o seu cliente ideal?', ajuda: 'Idade, região, momento de vida, profissão, poder de compra. Se ajudar, descreva um cliente real que você gostaria de ter mais (sem dizer o nome).', ob: true },
-      { chave: 'dores', tipo: 'longo', titulo: 'O que faz essa pessoa procurar você?', ajuda: 'O problema, o desejo ou a situação do momento. Ex.: uma dor que não passa, um processo trabalhista, a festa de 15 anos chegando, a vontade de mudar o visual.', ob: true },
-      { chave: 'duvidas', tipo: 'longo', titulo: 'Quais perguntas os clientes sempre fazem antes de contratar?', ajuda: 'Preço, prazo, como funciona, se dói, se atende convênio, se entrega na região. Elas viram a seção de perguntas e respostas do site.', ob: true },
-      { chave: 'cidades', tipo: 'texto', titulo: 'Em quais cidades ou bairros você atende?', ajuda: 'Se atende online ou faz entregas, diga a região. Isso ajuda o site a aparecer no Google para quem está perto.', ob: true },
-    ] },
-  { id: 'diferencial', rot: 'Diferenciais', titulo: 'Por que escolhem você',
-    campos: [
-      { chave: 'diferenciais', tipo: 'longo', titulo: 'Por que os clientes escolhem você?', ajuda: 'Pense no que você ouve dos clientes e no que faz diferente da concorrência. Ex.: atendimento sem pressa, resposta no mesmo dia, ingredientes sem conservantes, especialização rara na cidade.', ob: true },
-      { chave: 'provas', tipo: 'longo', titulo: 'O que comprova a qualidade do seu trabalho?', ajuda: 'Números, nota no Google, prêmios, aparições na imprensa, depoimentos, casos de sucesso. Não envie nomes ou fotos de clientes e pacientes sem autorização.' },
-      { chave: 'concorrentes', tipo: 'longo', titulo: 'Concorrentes ou referências', ajuda: 'Quem disputa os mesmos clientes ou quem você admira, mesmo de outra cidade. Se tiver, mande o site ou o Instagram.' },
-      { chave: 'proposito', tipo: 'longo', titulo: 'Por que você faz o que faz?', ajuda: 'O que motivou a escolha da profissão ou do negócio e os valores que guiam o seu trabalho.' },
-      { chave: 'frase', tipo: 'texto', titulo: 'Existe uma frase que representa a marca?', ajuda: 'Se não tiver, deixe em branco.' },
-    ] },
-  { id: 'contato', rot: 'Contato', titulo: 'Como te encontram',
-    campos: [
-      { chave: 'contato', tipo: 'longo', titulo: 'Contato, endereço e horários', ajuda: 'Exatamente como devem aparecer no site.', ob: true },
-      { chave: 'redes', tipo: 'longo', titulo: 'Instagram e outros links', ajuda: 'Os links que podem aparecer no site.' },
-    ] },
-  { id: 'visual', rot: 'Visual e referências', titulo: 'Como o site vai parecer',
-    intro: ['Arquivos como logo, fotos e depoimentos não vão por aqui: mande no grupo do WhatsApp com a equipe da Stoot.'],
-    campos: [
-      { chave: 'identidade', tipo: 'escolha', titulo: 'Você já tem logo e identidade visual?', ajuda: 'Identidade visual é o conjunto de logo, cores e fontes da marca.', ob: true, opcoes: [
-        { t: 'Tenho logo, cores e fontes definidos', d: 'Mande os arquivos no grupo do WhatsApp' },
-        { t: 'Tenho só o logo', d: 'A gente define cores e fontes a partir dele' },
-        { t: 'Ainda não tenho', d: 'Vamos conversar sobre a criação' },
-      ] },
-      { chave: 'referencias', tipo: 'longo', titulo: 'Sites que você acha bonitos', ajuda: 'Mande 2 ou 3 links, de qualquer área, e diga o que gosta em cada um. Ex.: as cores, as fotos grandes, ser simples de navegar.' },
-      { chave: 'fotos', tipo: 'escolha', titulo: 'Tem fotos profissionais para o site?', ajuda: 'Suas, da equipe, do espaço ou dos produtos.', ob: true, opcoes: [
-        { t: 'Tenho fotos profissionais', d: 'Mande no grupo do WhatsApp' },
-        { t: 'Tenho algumas, mas preciso de mais', d: 'Mande as que tem no grupo do WhatsApp' },
-        { t: 'Vou precisar de captação', d: 'A equipe da Stoot organiza com você' },
-      ] },
-      { chave: 'depoimentos', tipo: 'escolha', titulo: 'Tem depoimentos de clientes que podem aparecer no site?', ajuda: 'Prints, textos ou vídeos de clientes satisfeitos. Mande no grupo do WhatsApp com a equipe. Só usamos com autorização de quem deu o depoimento.', ob: true, opcoes: [
-        { t: 'Tenho, com autorização', d: 'Mande no grupo do WhatsApp' },
-        { t: 'Tenho, mas preciso pedir autorização', d: 'Mande quando estiver liberado' },
-        { t: 'Ainda não tenho', d: 'A gente pode ajudar a reunir' },
-      ] },
-    ] },
-  { id: 'estrutura', rot: 'Site atual e domínio', titulo: 'Site atual e domínio',
-    campos: [
-      { chave: 'site_atual', tipo: 'longo', titulo: 'Já tem um site hoje?', ajuda: 'Se tiver, mande o link e diga o que precisa ser mantido: páginas, blog, textos.' },
-      { chave: 'dominio', tipo: 'escolha', titulo: 'Você já tem domínio?', ajuda: 'Domínio é o endereço do site, como seunome.com.br.', ob: true, opcoes: ['Tenho', 'Não tenho', 'Não sei'] },
-      { chave: 'dominio_qual', tipo: 'texto', titulo: 'Se tiver, qual é o domínio e quem tem o acesso?', ajuda: 'Ex.: seunome.com.br, registrado no Registro.br pela secretária. Não mande senhas aqui.' },
-    ] },
-  { id: 'detalhes', rot: 'Para finalizar', titulo: 'Para finalizar',
-    campos: [
-      { chave: 'evitar', tipo: 'longo', titulo: 'Tem algo que NÃO pode aparecer no site?', ajuda: 'Assuntos, palavras, promessas, imagens ou comparações que você prefere evitar, inclusive regras do seu conselho profissional.' },
-      { chave: 'extra', tipo: 'longo', titulo: 'Quer contar mais alguma coisa?', ajuda: 'Qualquer informação que não perguntamos e que você acha importante.' },
-    ] },
-];
-
-const qs = new URLSearchParams(location.search);
-const CODIGO = (qs.get('c') || qs.get('codigo') || '').trim().toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
-const GUARDA = 'briefing-stoot:' + (CODIGO || 'sem-codigo');
-const CHECK = '<svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>';
-const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-
-let r = {}, atual = 0, enviado = false;
-try { const g = JSON.parse(localStorage.getItem(GUARDA) || 'null'); if (g && g.r) { r = g.r; atual = Math.min(g.atual || 0, ETAPAS.length - 1); } } catch (_) {}
-const guardar = () => { try { localStorage.setItem(GUARDA, JSON.stringify({ r, atual })); document.getElementById('salvo').textContent = 'Salvo neste aparelho'; } catch (_) {} };
-
-const visiveis = () => ETAPAS.filter((e) => !e.se || e.se(r));
-const app = document.getElementById('app');
-
-function htmlCampo(c) {
-  const v = r[c.chave];
-  const tit = `${esc(c.titulo)}${c.ob ? '<span class="ob" aria-hidden="true">*</span>' : '<span class="opc">opcional</span>'}`;
-  const ajuda = c.ajuda ? `<p class="ajuda" id="aj-${c.chave}">${esc(c.ajuda)}</p>` : '';
-  const erro = `<div class="erro" role="alert">${c.tipo === 'varias' || c.tipo === 'escolha' ? 'Escolha uma opção para continuar.' : 'Responda esta pergunta para continuar.'}</div>`;
-  if (c.tipo === 'texto' || c.tipo === 'longo') {
-    const attrs = `id="f-${c.chave}" data-chave="${c.chave}" class="ent" ${c.ob ? 'required' : ''} ${c.ajuda ? `aria-describedby="aj-${c.chave}"` : ''} placeholder="${esc(c.ph || '')}"`;
-    const ent = c.tipo === 'texto' ? `<input type="text" ${attrs} value="${esc(v || '')}" autocomplete="off">` : `<textarea ${attrs}>${esc(v || '')}</textarea>`;
-    return `<div class="campo" data-campo="${c.chave}"><label for="f-${c.chave}">${tit}</label>${ajuda}${ent}${erro}</div>`;
-  }
-  const multi = c.tipo === 'varias';
-  const marcados = multi ? (Array.isArray(v) ? v : []) : [v];
-  const ops = c.opcoes.map((op) => {
-    const o = typeof op === 'string' ? op : op.t, d = typeof op === 'string' ? '' : op.d;
-    return `<label class="op${multi ? ' multi' : ''}${d ? ' com-desc' : ''}"><input type="${multi ? 'checkbox' : 'radio'}" name="${c.chave}" value="${esc(o)}" ${marcados.includes(o) ? 'checked' : ''}><span class="marc">${CHECK}</span><span class="txt">${esc(o)}${d ? `<small>${esc(d)}</small>` : ''}</span></label>`;
-  }).join('');
-  const outro = c.outro ? `<label class="op multi"><input type="checkbox" name="${c.chave}" value="__outro" ${marcados.includes('__outro') ? 'checked' : ''}><span class="marc">${CHECK}</span><span class="txt">Outro</span></label>` : '';
-  const outroTxt = c.outro ? `<input type="text" class="ent outro-txt${marcados.includes('__outro') ? ' vis' : ''}" data-outro="${c.chave}" placeholder="Qual?" value="${esc(r[c.chave + '_outro'] || '')}">` : '';
-  return `<div class="campo" data-campo="${c.chave}" role="group" aria-labelledby="t-${c.chave}"><div class="tit" id="t-${c.chave}">${tit}</div>${ajuda}<div class="ops">${ops}${outro}</div>${outroTxt}${erro}</div>`;
-}
-
-function desenhar() {
-  // saúde e empresa são caminhos alternativos: o total é sempre o de um caminho (6), mesmo antes de escolher o perfil
-  const etapas = visiveis(), e = etapas[atual], total = ETAPAS.length - 1;
-  document.getElementById('etapa').innerHTML = `Etapa <strong>${atual + 1}</strong> de ${total}`;
-  document.getElementById('barra').style.width = `${((atual + 1) / total) * 100}%`;
-  app.innerHTML = `<p class="rot">${esc(e.rot)}</p><h1>${esc(e.titulo)}</h1>${e.intro ? `<div class="intro">${e.intro.map((p) => `<p>${esc(p)}</p>`).join('')}</div>` : ''}
-    <form id="form" novalidate><div class="hp" aria-hidden="true"><label>Site<input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>${e.campos.map(htmlCampo).join('')}</form>`;
-  document.getElementById('voltar').classList.toggle('oculto', atual === 0);
-  document.getElementById('seguir').textContent = atual === 0 ? 'Começar' : atual === etapas.length - 1 ? 'Enviar briefing' : 'Continuar';
-  window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
-}
-
-app.addEventListener('input', (ev) => {
-  const t = ev.target;
-  if (t.dataset.chave) r[t.dataset.chave] = t.value;
-  if (t.dataset.outro) r[t.dataset.outro + '_outro'] = t.value;
-  if (t.name && (t.type === 'radio' || t.type === 'checkbox')) {
-    const c = t.name;
-    if (t.type === 'radio') r[c] = t.value;
-    else r[c] = [...app.querySelectorAll(`input[name="${c}"]:checked`)].map((x) => x.value);
-    const ot = app.querySelector(`[data-outro="${c}"]`);
-    if (ot) { const on = (r[c] || []).includes('__outro'); ot.classList.toggle('vis', on); if (on && t.value === '__outro') ot.focus(); }
-  }
-  t.closest('.campo')?.classList.remove('inv');
-  guardar();
-});
-
-function vazio(c) {
-  const v = r[c.chave];
-  if (c.tipo === 'varias') { const l = Array.isArray(v) ? v : []; return !l.length || (l.length === 1 && l[0] === '__outro' && !String(r[c.chave + '_outro'] || '').trim()); }
-  return !String(v || '').trim();
-}
-function validar() {
-  const e = visiveis()[atual]; let primeiro = null;
-  for (const c of e.campos) {
-    const el = app.querySelector(`[data-campo="${c.chave}"]`);
-    const ruim = c.ob && vazio(c);
-    el.classList.toggle('inv', ruim);
-    if (ruim && !primeiro) primeiro = el;
-  }
-  if (primeiro) { primeiro.scrollIntoView({ behavior: 'smooth', block: 'center' }); (primeiro.querySelector('input, textarea') || {}).focus?.({ preventScroll: true }); }
-  return !primeiro;
-}
-
-function resposta(c) {
-  const v = r[c.chave];
-  if (c.tipo === 'varias') return (Array.isArray(v) ? v : []).map((x) => (x === '__outro' ? `Outro: ${String(r[c.chave + '_outro'] || '').trim()}` : x)).filter((x) => x && x !== 'Outro: ').join(', ');
-  return String(v || '').trim();
-}
-
-async function enviar() {
-  if (app.querySelector('input[name="site"]')?.value) return; // robô
-  const btn = document.getElementById('seguir');
-  btn.disabled = true; btn.textContent = 'Enviando…';
-  const respostas = [];
-  for (const e of visiveis()) for (const c of e.campos) { const x = resposta(c); if (x) respostas.push({ chave: c.chave, pergunta: c.titulo, resposta: x }); }
-  const dados = { v: 1, origem: 'Página Stoot', codigo: CODIGO, nome: resposta({ chave: 'nome', tipo: 'texto' }), perfil: r.perfil || '', enviado_em: new Date().toISOString(), respostas };
-  try {
-    // text/plain evita a checagem prévia de CORS; o script do Google lê o corpo como JSON.
-    await fetch(ENVIO, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(dados) });
-    enviado = true;
-    try { localStorage.removeItem(GUARDA); } catch (_) {}
-    agradecer();
-  } catch (_) {
-    btn.disabled = false; btn.textContent = 'Tentar de novo';
-    alert('Não conseguimos enviar agora. Confira a internet e tente de novo; suas respostas continuam salvas.');
-  }
-}
-
-function agradecer() {
-  document.getElementById('etapa').innerHTML = '<strong>Enviado</strong>';
-  document.getElementById('barra').style.width = '100%';
-  document.getElementById('nav').classList.add('oculto');
-  app.innerHTML = `<div class="fim"><div class="selo"><svg viewBox="0 0 16 16" fill="none" stroke="#0f7a4d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></div>
-    <p class="rot">Briefing recebido</p><h1>Obrigado! Agora é com a gente.</h1>
-    <div class="intro"><p>Suas respostas já chegaram para a equipe da Stoot.</p><p>Para seguir, mande logo, fotos e materiais da identidade visual no grupo do WhatsApp com a equipe.</p></div></div>`;
-  window.scrollTo(0, 0);
-}
-
-document.getElementById('seguir').addEventListener('click', () => {
-  if (!validar()) return;
-  const total = visiveis().length;
-  if (atual === total - 1) return enviar();
-  atual++; guardar(); desenhar();
-});
-document.getElementById('voltar').addEventListener('click', () => { if (atual > 0) { atual--; guardar(); desenhar(); } });
-app.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' && ev.target.tagName === 'INPUT' && ev.target.type === 'text') { ev.preventDefault(); document.getElementById('seguir').click(); } });
-window.addEventListener('beforeunload', (ev) => { if (!enviado && Object.keys(r).length && atual > 0) { ev.preventDefault(); ev.returnValue = ''; } });
-
-desenhar();
+/* Leva o código do cliente (?c=) e os serviços (?s=) para o formulário. */
+document.getElementById('comecar').href = 'formulario/' + location.search;
 </script>
 </body>
 </html>
